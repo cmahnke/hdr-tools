@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
   pull_request:
 
+env:
+  LIBJXL_VERSION: v0.10.2
+  IMAGEMAGICK_VERSION: 7.1.1-32
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -43,5 +47,7 @@ jobs:
           context: .
           file: docker/Dockerfile
           platforms: linux/amd64,linux/arm64
+          build-args: GIT_TAG=${{ env.IMAGEMAGICK_VERSION }}
           tags: |
             ghcr.io/cmahnke/hdr-tools:latest
+            ghcr.io/cmahnke/hdr-tools:${{ env.LIBJXL_VERSION }}
