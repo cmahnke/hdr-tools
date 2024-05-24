@@ -48,7 +48,7 @@ HDR images are likely to have maximum values larger then either 4096 or 65535, d
 convert udhr:input.jpeg output.avif
 ```
 
-### EXR to TIFF
+### EXR / HDR to TIFF
 
 Don't use `-colorspace RGB` since this overexposes the output file
 
@@ -81,5 +81,6 @@ pfsinexr in.exr |pfstmo_drago03|pfsoutexr out.exr
 * `pfstmo_reinhard02` good colors
 
 ### Documentation TODO
-* Note on colorspace  (EXR is GB)
+* Note on colorspace  (EXR is RGB)
 *  -define quantum:format=floating-point
+* `ultrahdr_app`

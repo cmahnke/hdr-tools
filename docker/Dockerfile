@@ -3,6 +3,7 @@ ARG LIBJXL_VERSION="latest"
 FROM ghcr.io/cmahnke/jpeg-xl-action:${LIBJXL_VERSION}
 
 ARG IM_GIT_TAG=7.1.1-32
+ARG LIBULTRAHDR_GIT_TAG=main
 
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/hdr-tools
@@ -10,7 +11,6 @@ LABEL org.opencontainers.image.source https://github.com/cmahnke/hdr-tools
 ENV BUILD_DEPS="git wget cmake make automake autoconf libtool clang-dev g++ zlib-dev libjpeg-turbo-dev libpng-dev libavif-dev libwebp-dev openexr-dev libheif-dev libzip-dev libxml2-dev lcms2-dev freetype-dev fontconfig-dev tiff-dev patch gsl-dev" \
     RUN_DEPS="zlib jpeg libjpeg-turbo libpng openexr-libopenexr libavif libwebp libheif libzip libxml2 libwebpdecoder libwebpdemux libwebpmux openexr-libopenexrutil openexr-libopenexrcore brotli lcms2 freetype fontconfig ffmpeg libjxl-tools tiff libavif-apps exiv2 gsl" \
     LIBULTRAHDR_GIT_REPO="https://github.com/google/libultrahdr.git" \
-    LIBULTRAHDR_GIT_TAG="main" \
     IM_GIT_REPO="https://github.com/ImageMagick/ImageMagick.git" \
     LIBJXR_GIT_REPO="https://github.com/4creators/jxrlib.git" \
     LIBJXR_GIT_TAG="v2019.10.9" \
@@ -35,14 +35,15 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     mkdir -p build && cd build && \
     cmake -Wno-dev -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=/usr ../ && \
     make && make install && \
-    cd .. && \
+    cd ../.. && \
 # libultrahdr
     git clone --depth 1 --branch $LIBULTRAHDR_GIT_TAG $LIBULTRAHDR_GIT_REPO && \
     cd libultrahdr && \
     mkdir -p build && cd build && \
-    cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DUHDR_BUILD_TESTS=1 -DCMAKE_INSTALL_PREFIX=/usr ../ && \
+    cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DUHDR_BUILD_EXAMPLES=1 -DUHDR_ENABLE_INSTALL=1 -DUHDR_BUILD_TESTS=0 -DCMAKE_INSTALL_PREFIX=/usr ../ && \
     make && make install && \
-    cd .. && \
+    cp ultrahdr_app /usr/bin/ && \
+    cd ../.. && \
 # libjxr
     git clone --depth 1 --branch $LIBJXR_GIT_TAG $LIBJXR_GIT_REPO && \
     cd jxrlib && \
