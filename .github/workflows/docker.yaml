@@ -32,8 +32,8 @@ jobs:
         with:
           # Use | to preserve valid YAML syntax
           matrix: |
-            im_version: ['${{ env.IMAGEMAGICK_VERSION }}', 'main']
-            uhdr_versions: ['${{ env.LIBULTRAHDR_GIT_TAG }}', 'main']
+            im_version: [${{ env.IMAGEMAGICK_VERSION }}, main]
+            uhdr_versions: [${{ env.LIBULTRAHDR_GIT_TAG }}, main]
 
   build_hdr_tools:
     name: Push hdr-tools Docker image to GitHub Packages
