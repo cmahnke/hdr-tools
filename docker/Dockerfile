@@ -7,13 +7,15 @@ ARG IM_GIT_TAG=7.1.1-32
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/hdr-tools
 
-ENV BUILD_DEPS="git wget cmake make automake autoconf libtool clang-dev g++ zlib-dev libjpeg-turbo-dev libpng-dev libavif-dev libwebp-dev openexr-dev libheif-dev libzip-dev libxml2-dev lcms2-dev freetype-dev fontconfig-dev tiff-dev" \
-    RUN_DEPS="zlib jpeg libjpeg-turbo libpng openexr-libopenexr libavif libwebp libheif libzip libxml2 libwebpdecoder libwebpdemux libwebpmux openexr-libopenexrutil openexr-libopenexrcore brotli lcms2 freetype fontconfig ffmpeg libjxl-tools tiff" \
+ENV BUILD_DEPS="git wget cmake make automake autoconf libtool clang-dev g++ zlib-dev libjpeg-turbo-dev libpng-dev libavif-dev libwebp-dev openexr-dev libheif-dev libzip-dev libxml2-dev lcms2-dev freetype-dev fontconfig-dev tiff-dev patch gsl-dev" \
+    RUN_DEPS="zlib jpeg libjpeg-turbo libpng openexr-libopenexr libavif libwebp libheif libzip libxml2 libwebpdecoder libwebpdemux libwebpmux openexr-libopenexrutil openexr-libopenexrcore brotli lcms2 freetype fontconfig ffmpeg libjxl-tools tiff libavif-apps exiv2 gsl" \
     LIBULTRAHDR_GIT_REPO="https://github.com/google/libultrahdr.git" \
     LIBULTRAHDR_GIT_TAG="main" \
     IM_GIT_REPO="https://github.com/ImageMagick/ImageMagick.git" \
     LIBJXR_GIT_REPO="https://github.com/4creators/jxrlib.git" \
     LIBJXR_GIT_TAG="v2019.10.9" \
+    PFSTOOLS_URL="https://sourceforge.net/projects/pfstools/files/pfstools/2.2.0/pfstools-2.2.0.tgz/download" \
+    PFSTOOLS_EXR_PATCH="https://sourceforge.net/p/pfstools/bugs/54/attachment/0001-Prefer-upstream-CMake-Config-Mode-files-for-OpenEXR.patch" \
     BUILD_DIR=/tmp/build
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
@@ -23,6 +25,17 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     mkdir -p $BUILD_DIR $DATA_DIR && \
     export CC=clang CXX=clang++ && \
     cd $BUILD_DIR && \
+# pfstools
+    export PFSTOOLS_FILE=$(basename $(dirname "$PFSTOOLS_URL")) && \
+    wget -O "$PFSTOOLS_FILE" "$PFSTOOLS_URL" && \
+    tar xzf "$PFSTOOLS_FILE" && \
+    cd $(basename "$PFSTOOLS_FILE" .tgz ) && \
+    wget $PFSTOOLS_EXR_PATCH && \
+    patch < $(basename "$PFSTOOLS_EXR_PATCH") && \
+    mkdir -p build && cd build && \
+    cmake -Wno-dev -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=/usr ../ && \
+    make && make install && \
+    cd .. && \
 # libultrahdr
     git clone --depth 1 --branch $LIBULTRAHDR_GIT_TAG $LIBULTRAHDR_GIT_REPO && \
     cd libultrahdr && \
