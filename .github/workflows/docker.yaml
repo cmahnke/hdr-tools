@@ -9,8 +9,8 @@ on:
 
 env:
   LIBJXL_VERSION: v0.10.2
-  IMAGEMAGICK_VERSION: 7.1.1-32
-  LIBULTRAHDR_GIT_TAG: 1.0.0
+  IMAGEMAGICK_VERSION: '7.1.1-32'
+  LIBULTRAHDR_GIT_TAG: '1.0.0'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
