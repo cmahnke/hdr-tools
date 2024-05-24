@@ -42,9 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        im_version: ["${{ env.IMAGEMAGICK_VERSION }}", "main"]
-        uhdr_versions: ["${{ env.LIBULTRAHDR_GIT_TAG }}", "main"]
-        can-fail: [false]
+        matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
 
     steps:
       - name: Check out the repo
