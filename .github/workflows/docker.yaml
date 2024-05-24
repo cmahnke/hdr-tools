@@ -47,7 +47,7 @@ jobs:
           context: .
           file: docker/Dockerfile
           platforms: linux/amd64,linux/arm64
-          build-args: GIT_TAG=${{ env.IMAGEMAGICK_VERSION }}
+          build-args: IM_GIT_TAG=${{ env.IMAGEMAGICK_VERSION }}
           tags: |
             ghcr.io/cmahnke/hdr-tools:latest
-            ghcr.io/cmahnke/hdr-tools:${{ env.LIBJXL_VERSION }}
+            ghcr.io/cmahnke/hdr-tools:imagemagick-${{ env.IMAGEMAGICK_VERSION }}
