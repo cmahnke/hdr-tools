@@ -41,6 +41,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     cd libultrahdr && \
     mkdir -p build && cd build && \
     cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DUHDR_BUILD_EXAMPLES=1 -DUHDR_ENABLE_INSTALL=1 -DUHDR_BUILD_TESTS=0 -DCMAKE_INSTALL_PREFIX=/usr ../ && \
+    if [ "$LIBULTRAHDR_GIT_TAG" = "1.0.0" ] ; then \
+      echo "libultrahdr 1.0.0 can't be build as shared library!" && \
+      exit 1 ; \
+    fi && \
     make && make install && \
     cp ultrahdr_app /usr/bin/ && \
     cd ../.. && \

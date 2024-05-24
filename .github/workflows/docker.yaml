@@ -10,7 +10,7 @@ on:
 env:
   LIBJXL_VERSION: v0.10.2
   IMAGEMAGICK_VERSION: '7.1.1-32'
-  LIBULTRAHDR_GIT_TAG: '1.0.0'
+  LIBULTRAHDR_GIT_TAG: 'main'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -33,7 +33,7 @@ jobs:
           # Use | to preserve valid YAML syntax
           matrix: |
             im_version: [${{ env.IMAGEMAGICK_VERSION }}, main]
-            uhdr_version: [${{ env.LIBULTRAHDR_GIT_TAG }}, main]
+            uhdr_version: [${{ env.LIBULTRAHDR_GIT_TAG }}]
 
   build_hdr_tools:
     name: Push hdr-tools Docker image to GitHub Packages
