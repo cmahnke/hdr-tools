@@ -22,6 +22,7 @@ permissions:
 
 jobs:
   setup-matrix:
+    name: Create the build matrix
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.setup-matrix.outputs.matrix }}
@@ -33,9 +34,10 @@ jobs:
           matrix: |
             im_version: ["${{ env.IMAGEMAGICK_VERSION }}", "main"]
             uhdr_versions: ["${{ env.LIBULTRAHDR_GIT_TAG }}", "main"]
-  
+
   build_hdr_tools:
     name: Push hdr-tools Docker image to GitHub Packages
+    needs: setup-matrix
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
