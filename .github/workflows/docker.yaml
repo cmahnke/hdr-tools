@@ -11,6 +11,7 @@ env:
   LIBJXL_VERSION: v0.10.2
   IMAGEMAGICK_VERSION: '7.1.1-33'
   LIBULTRAHDR_GIT_TAG: 'main'
+  ADDITIONAL_DEPS: 'ffmpeg'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -34,6 +35,7 @@ jobs:
           matrix: |
             im_version: [${{ env.IMAGEMAGICK_VERSION }}, main]
             uhdr_version: [${{ env.LIBULTRAHDR_GIT_TAG }}]
+            additional_deps: [${{ env.ADDITIONAL_DEPS, ''}}]
 
   build_hdr_tools:
     name: Push hdr-tools Docker image to GitHub Packages
@@ -69,6 +71,8 @@ jobs:
           build-args: |
             IM_GIT_TAG=${{ matrix.im_version }}
             LIBULTRAHDR_GIT_TAG=${{ matrix.uhdr_version }}
+            ADDITIONAL_DEPS=${{ matrix.additional_deps }}
+# TODO: This won't work if we have multiple dependencices, seperated by space ' '
           tags: |
-            ghcr.io/cmahnke/hdr-tools:imagemagick-${{ matrix.im_version }}-uhdr-${{ matrix.uhdr_version }}
+            ghcr.io/cmahnke/hdr-tools:imagemagick-${{ matrix.im_version }}-uhdr-${{ matrix.uhdr_version }}${{ (matrix.additional_deps != '' ) && format('-{0}', matrix.additional_deps) || '' }}
             ${{ ( matrix.im_version == 'main' && matrix.uhdr_version == 'main' ) && 'ghcr.io/cmahnke/hdr-tools:latest' || '' }}
