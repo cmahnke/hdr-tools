@@ -35,7 +35,7 @@ jobs:
           matrix: |
             im_version: [${{ env.IMAGEMAGICK_VERSION }}, main]
             uhdr_version: [${{ env.LIBULTRAHDR_GIT_TAG }}]
-            additional_deps: [${{ env.ADDITIONAL_DEPS, ''}}]
+            additional_deps: [${{ env.ADDITIONAL_DEPS }}, '']
 
   build_hdr_tools:
     name: Push hdr-tools Docker image to GitHub Packages
