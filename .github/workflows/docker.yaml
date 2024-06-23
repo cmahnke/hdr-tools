@@ -68,8 +68,8 @@ jobs:
           export RAW_ADDITIONAL_DEPS="${{ matrix.additional_deps }}"
           export DEPS_TAG=$(echo "$RAW_ADDITIONAL_DEPS" | tr ' ' '-')
           echo "DEPS_TAG=$DEPS_TAG" >> $GITHUB_ENV
-          env
-          echo "$GITHUB_ENV"
+          echo "Contents of $GITHUB_ENV:"
+          cat $GITHUB_ENV
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v6.1.0
         with:
