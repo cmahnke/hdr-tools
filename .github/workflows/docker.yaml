@@ -65,8 +65,8 @@ jobs:
       # See https://stackoverflow.com/questions/67231657/how-to-replace-string-in-expression-with-github-actions
       - name: Additional dependencies tag
         run:
-          RAW_ADDITIONAL_DEPS="${{ matrix.additional_deps }}"
-          DEPS_TAG=$(echo "$RAW_ADDITIONAL_DEPS" | tr ' ' '-')
+          export RAW_ADDITIONAL_DEPS="${{ matrix.additional_deps }}"
+          export DEPS_TAG=$(echo "$RAW_ADDITIONAL_DEPS" | tr ' ' '-')
           echo "DEPS_TAG=$DEPS_TAG" >> $GITHUB_ENV
           env
           echo "$GITHUB_ENV"
