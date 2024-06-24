@@ -12,6 +12,8 @@ env:
   IMAGEMAGICK_VERSION: '7.1.1-33'
   LIBULTRAHDR_GIT_TAG: 'main'
   ADDITIONAL_DEPS: 'ffmpeg bash py3-pip'
+  OPENCV_TAG: '4.10.0'
+  PYTHON_TAG: '3.12-alpine'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -75,7 +77,7 @@ jobs:
         with:
           push: true
           context: .
-          file: docker/Dockerfile
+          file: docker/hdr-tools/Dockerfile
           platforms: linux/amd64,linux/arm64
           build-args: |
             IM_GIT_TAG=${{ matrix.im_version }}
@@ -84,3 +86,35 @@ jobs:
           tags: |
             ghcr.io/cmahnke/hdr-tools:imagemagick-${{ matrix.im_version }}-uhdr-${{ matrix.uhdr_version }}${{ (matrix.additional_deps != '' ) && format('-{0}', env.DEPS_TAG) || '' }}
             ${{ ( matrix.im_version == 'main' && matrix.uhdr_version == 'main' ) && 'ghcr.io/cmahnke/hdr-tools:latest' || '' }}
+  build_python_opencv:
+    name: Push Python OpenCV contrib Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@v3.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          logout: false
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.3.0
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v6.1.0
+        with:
+          push: true
+          context: .
+          file: docker/hdr-tools/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            OPENCV_TAG=${{ env.OPENCV_TAG }}
+            TAG=${{ env.PYTHON_TAG }}
+          tags: |
+            ghcr.io/cmahnke/hdr-tools/python:${{ env.PYTHON_TAG }}-opencv-${{ env.OPENCV_TAG }}
