@@ -7,7 +7,7 @@ ARG OPENCV_TAG=4.10.0
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/hdr-tools
 
-ENV BUILD_DEPS="build-base cmake wget unzip hdf5-dev protobuf-dev openblas-dev@community libjpeg-turbo-dev libpng-dev tiff-dev libwebp-dev openjpeg-dev libtbb-dev@testing  eigen-dev tesseract-ocr-dev python3-dev linux-headers openexr-dev ffmpeg-dev" \
+ENV BUILD_DEPS="build-base cmake wget unzip hdf5-dev protobuf-dev openblas-dev@community libjpeg-turbo-dev libpng-dev tiff-dev libwebp-dev openjpeg-dev libtbb-dev@testing  eigen-dev tesseract-ocr-dev python3-dev linux-headers openexr-dev ffmpeg-dev " \
     RUN_DEPS="hdf5 protobuf openblas libjpeg libpng tiff libwebp openjpeg openjpeg-tools libtbb@testing eigen tesseract-ocr tesseract-ocr-data-por py3-pip openexr-libopenexr openexr-libopenexrutil openexr-libopenexrcore ffmpeg" \
     BUILD_DIR=/tmp/build
 
@@ -40,6 +40,7 @@ RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /et
     make install && \
     cd / && \
 # Cleanup
+    #sed -E 's/@[[:alnum:]]+//g'
     rm -rf $BUILD_DIR  && \
-    apk del $BUILD_DEPS && \
+    apk del $(echo $BUILD_DEPS | sed -E 's/@[[:alnum:]]+//g') && \
     rm -rf /var/cache/apk/* /root/.cache

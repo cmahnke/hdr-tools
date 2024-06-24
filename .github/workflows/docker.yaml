@@ -11,7 +11,7 @@ env:
   LIBJXL_VERSION: v0.10.2
   IMAGEMAGICK_VERSION: '7.1.1-33'
   LIBULTRAHDR_GIT_TAG: 'main'
-  ADDITIONAL_DEPS: 'ffmpeg bash py3-pip'
+  ADDITIONAL_DEPS: 'ffmpeg'
   OPENCV_TAG: '4.10.0'
   PYTHON_TAG: '3.12-alpine'
 
