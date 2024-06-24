@@ -11,7 +11,7 @@ env:
   LIBJXL_VERSION: v0.10.2
   IMAGEMAGICK_VERSION: '7.1.1-33'
   LIBULTRAHDR_GIT_TAG: 'main'
-  ADDITIONAL_DEPS: 'ffmpeg py3-pip'
+  ADDITIONAL_DEPS: 'ffmpeg bash curl git'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
