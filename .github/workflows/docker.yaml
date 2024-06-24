@@ -86,6 +86,7 @@ jobs:
           tags: |
             ghcr.io/cmahnke/hdr-tools:imagemagick-${{ matrix.im_version }}-uhdr-${{ matrix.uhdr_version }}${{ (matrix.additional_deps != '' ) && format('-{0}', env.DEPS_TAG) || '' }}
             ${{ ( matrix.im_version == 'main' && matrix.uhdr_version == 'main' ) && 'ghcr.io/cmahnke/hdr-tools:latest' || '' }}
+
   build_python_opencv:
     name: Push Python OpenCV contrib Docker image to GitHub Packages
     runs-on: ubuntu-latest
@@ -111,7 +112,7 @@ jobs:
         with:
           push: true
           context: .
-          file: docker/hdr-tools/Dockerfile
+          file: docker/python-opencv/Dockerfile
           platforms: linux/amd64,linux/arm64
           build-args: |
             OPENCV_TAG=${{ env.OPENCV_TAG }}
