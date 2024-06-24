@@ -8,7 +8,7 @@ LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/hdr-tools
 
 ENV BUILD_DEPS="build-base cmake wget unzip hdf5-dev protobuf-dev openblas-dev@community libjpeg-turbo-dev libpng-dev tiff-dev libwebp-dev openjpeg-dev libtbb-dev@testing  eigen-dev tesseract-ocr-dev python3-dev linux-headers openexr-dev ffmpeg-dev " \
-    RUN_DEPS="hdf5 protobuf openblas libjpeg libpng tiff libwebp openjpeg openjpeg-tools libtbb@testing eigen tesseract-ocr tesseract-ocr-data-por py3-pip openexr-libopenexr openexr-libopenexrutil openexr-libopenexrcore ffmpeg" \
+    RUN_DEPS="hdf5 protobuf openblas libjpeg libpng tiff libwebp openjpeg openjpeg-tools libtbb@testing eigen tesseract-ocr tesseract-ocr-data-por openexr-libopenexr openexr-libopenexrutil openexr-libopenexrcore ffmpeg" \
     BUILD_DIR=/tmp/build
 
 RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \

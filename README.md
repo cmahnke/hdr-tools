@@ -16,8 +16,16 @@ GUI (QT) applications MatLab, OpenCV aren't supported. ImageMagick, NetPBM and s
 
 # Building
 
+## HDR Tools
+
 ```
-docker buildx  build --progress=plain -f docker/Dockerfile .
+docker  build --progress=plain -f docker/hdr-tools/Dockerfile .
+```
+
+## Python OpenCV
+
+```
+docker build -f docker/python-opencv/Dockerfile .
 ```
 
 # Usage
