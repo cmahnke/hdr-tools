@@ -63,7 +63,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.3.0
+        uses: docker/setup-buildx-action@v3.4.0
       # See https://stackoverflow.com/questions/67231657/how-to-replace-string-in-expression-with-github-actions
       - name: Additional dependencies tag
         run: |
@@ -106,7 +106,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.3.0
+        uses: docker/setup-buildx-action@v3.4.0
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v6.3.0
         with:
