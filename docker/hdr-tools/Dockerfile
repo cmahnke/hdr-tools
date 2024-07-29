@@ -40,6 +40,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 # libultrahdr
     git clone --depth 1 --branch $LIBULTRAHDR_GIT_TAG $LIBULTRAHDR_GIT_REPO && \
     cd libultrahdr && \
+    sed -i -E 's/8192/32768/g' lib/include/ultrahdr/jpegdecoderhelper.h && \
     mkdir -p build && cd build && \
     cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DUHDR_BUILD_EXAMPLES=1 -DUHDR_ENABLE_INSTALL=1 -DUHDR_BUILD_TESTS=0 -DCMAKE_INSTALL_PREFIX=/usr ../ && \
     if [ "$LIBULTRAHDR_GIT_TAG" = "1.0.0" ] ; then \
