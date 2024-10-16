@@ -12,7 +12,7 @@ on:
 env:
   LIBJXL_VERSION: v0.11.0
   IMAGEMAGICK_VERSION: '7.1.1-39'
-  LIBULTRAHDR_GIT_TAG: 'main'
+  LIBULTRAHDR_GIT_TAG: 'v1.2.0'
   ADDITIONAL_DEPS: 'ffmpeg'
   OPENCV_TAG: '4.10.0'
   PYTHON_TAG: '3.12-alpine'
@@ -38,7 +38,7 @@ jobs:
           # Use | to preserve valid YAML syntax
           matrix: |
             im_version: [${{ env.IMAGEMAGICK_VERSION }}, main]
-            uhdr_version: [${{ env.LIBULTRAHDR_GIT_TAG }}]
+            uhdr_version: [${{ env.LIBULTRAHDR_GIT_TAG }}, main]
             additional_deps: [${{ env.ADDITIONAL_DEPS }}, '']
 
   build_hdr_tools:
