@@ -5,6 +5,10 @@ FROM ghcr.io/cmahnke/jpeg-xl-action:${LIBJXL_VERSION}
 ARG IM_GIT_TAG=7.1.1-43
 ARG LIBULTRAHDR_GIT_TAG=main
 ARG ADDITIONAL_DEPS=""
+ARG LIBJXR_GIT_REPO="https://github.com/mircomir/jxrlib.git"
+ARG LIBJXR_GIT_TAG="master"
+#ARG LIBJXR_GIT_REPO="https://salsa.debian.org/debian-phototools-team/jxrlib.git"
+#ARG LIBJXR_GIT_TAG="debian/1.2_git20170615.f752187-5"
 
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source="https://github.com/cmahnke/hdr-tools"
@@ -13,8 +17,8 @@ ENV BUILD_DEPS="git wget cmake make automake autoconf libtool clang-dev g++ zlib
     RUN_DEPS="zlib jpeg libjpeg-turbo libpng openexr-libopenexr libavif libwebp libheif libzip libxml2 libwebpdecoder libwebpdemux libwebpmux openexr-libopenexrutil openexr-libopenexrcore brotli lcms2 freetype fontconfig ffmpeg libjxl-tools tiff libavif-apps exiv2 gsl" \
     LIBULTRAHDR_GIT_REPO="https://github.com/google/libultrahdr.git" \
     IM_GIT_REPO="https://github.com/ImageMagick/ImageMagick.git" \
-    LIBJXR_GIT_REPO="https://salsa.debian.org/debian-phototools-team/jxrlib.git" \
-    LIBJXR_GIT_TAG="debian/1.2_git20170615.f752187-5" \
+    #LIBJXR_GIT_REPO="https://salsa.debian.org/debian-phototools-team/jxrlib.git" \
+    #LIBJXR_GIT_TAG="debian/1.2_git20170615.f752187-5" \
     #LIBJXR_GIT_REPO="https://github.com/4creators/jxrlib.git" \
     #LIBJXR_GIT_TAG="v2019.10.9" \
     PFSTOOLS_URL="https://sourceforge.net/projects/pfstools/files/pfstools/2.2.0/pfstools-2.2.0.tgz/download" \
