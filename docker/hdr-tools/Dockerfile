@@ -56,13 +56,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     make && make install && \
     cp ultrahdr_app /usr/bin/ && \
     cd ../.. && \
-# libjxr
-    git clone --depth 1 --branch $LIBJXR_GIT_TAG $LIBJXR_GIT_REPO && \
-    cd jxrlib && \
-    export DIR_INSTALL=/usr && \
-    make && make install && \
-    unset DIR_INSTALL && \
-    cd .. && \
+## libjxr
+#    git clone --depth 1 --branch $LIBJXR_GIT_TAG $LIBJXR_GIT_REPO && \
+#    cd jxrlib && \
+#    export DIR_INSTALL=/usr && \
+#    make && make install && \
+#    unset DIR_INSTALL && \
+#    cd .. && \
 # ImageMagick
     git clone --depth 1 --branch $IM_GIT_TAG $IM_GIT_REPO && \
     cd ImageMagick && \
