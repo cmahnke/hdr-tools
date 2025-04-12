@@ -2,7 +2,7 @@ ARG LIBJXL_VERSION="latest"
 
 FROM ghcr.io/cmahnke/jpeg-xl-action:${LIBJXL_VERSION}
 
-ARG IM_GIT_TAG=7.1.1-46
+ARG IM_GIT_TAG=7.1.1-47
 ARG LIBULTRAHDR_GIT_TAG=main
 ARG ADDITIONAL_DEPS=""
 ARG LIBJXR_GIT_REPO="https://github.com/mircomir/jxrlib.git"
