@@ -75,7 +75,7 @@ jobs:
           echo "Contents of $GITHUB_ENV:"
           cat $GITHUB_ENV
       - name: Push to GitHub Packages
-        uses: docker/build-push-action@v6.17.0
+        uses: docker/build-push-action@v6.18.0
         with:
           push: true
           context: .
@@ -110,7 +110,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.10.0
       - name: Push to GitHub Packages
-        uses: docker/build-push-action@v6.17.0
+        uses: docker/build-push-action@v6.18.0
         with:
           push: true
           context: .
