@@ -45,7 +45,7 @@ jobs:
     name: Push hdr-tools Docker image to GitHub Packages
     needs: setup-matrix
     runs-on: ubuntu-latest
-    continue-on-error: ${{ contains(uhdr_version, 'v1.4.0') }}
+    continue-on-error: ${{ contains(matrix.uhdr_version, 'v1.4.0') }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
