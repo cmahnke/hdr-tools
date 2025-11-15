@@ -13,8 +13,8 @@ ARG LIBJXR_GIT_TAG="master"
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source="https://github.com/cmahnke/hdr-tools"
 
-ENV BUILD_DEPS="git wget cmake make automake autoconf libtool clang-dev g++ zlib-dev libjpeg-turbo-dev libpng-dev libavif-dev libwebp-dev openexr-dev libheif-dev libzip-dev libxml2-dev lcms2-dev freetype-dev fontconfig-dev tiff-dev patch gsl-dev libtheora-dev" \
-    RUN_DEPS="zlib jpeg libjpeg-turbo libpng openexr-libopenexr libavif libwebp libheif libzip libxml2 libwebpdecoder libwebpdemux libwebpmux openexr-libopenexrutil openexr-libopenexrcore brotli lcms2 freetype fontconfig libjxl-tools tiff libavif-apps exiv2 gsl libtheora ffmpeg" \
+ENV BUILD_DEPS="git wget cmake make automake autoconf libtool clang-dev g++ zlib-dev libjpeg-turbo-dev libpng-dev libavif-dev libwebp-dev openexr-dev libheif-dev libzip-dev libxml2-dev lcms2-dev freetype-dev fontconfig-dev tiff-dev patch gsl-dev libtheora-dev libexif-dev" \
+    RUN_DEPS="zlib jpeg libjpeg-turbo libpng openexr-libopenexr libavif libwebp libheif libzip libxml2 libwebpdecoder libwebpdemux libwebpmux openexr-libopenexrutil openexr-libopenexrcore brotli lcms2 freetype fontconfig libjxl-tools tiff libavif-apps exiv2 gsl libtheora libexif ffmpeg" \
     LIBULTRAHDR_GIT_REPO="https://github.com/google/libultrahdr.git" \
     IM_GIT_REPO="https://github.com/ImageMagick/ImageMagick.git" \
     #LIBJXR_GIT_REPO="https://salsa.debian.org/debian-phototools-team/jxrlib.git" \
@@ -49,7 +49,7 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositor
     cd libultrahdr && \
     #sed -i -E 's/8192/32768/g' lib/include/ultrahdr/jpegdecoderhelper.h && \
     mkdir -p build && cd build && \
-    cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DUHDR_BUILD_EXAMPLES=1 -DUHDR_ENABLE_INSTALL=1 -DUHDR_BUILD_TESTS=0 -DUHDR_MAX_DIMENSION=32768 -DCMAKE_INSTALL_PREFIX=/usr ../ && \
+    cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DUHDR_BUILD_EXAMPLES=1 -DUHDR_ENABLE_INSTALL=1 -DUHDR_BUILD_TESTS=0 -DUHDR_MAX_DIMENSION=32768 -DCMAKE_INSTALL_PREFIX=/usr ../ && \
     if [ "$LIBULTRAHDR_GIT_TAG" = "1.0.0" ] ; then \
       echo "libultrahdr 1.0.0 can't be build as shared library!" && \
       exit 1 ; \
