@@ -3,7 +3,7 @@
 This Docker image contains ImageMagick for HDR capable image formats, like:
 * UltraHDR (`libultrahdr`)
 * JXL (`libjxl`)
-* JXR (`jxrlib`)
+* <s>JXR (`jxrlib`)</s>
 * OpenEXR
 * AVIF
 
