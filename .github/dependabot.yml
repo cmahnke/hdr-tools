@@ -16,6 +16,8 @@ updates:
       docker:
         patterns:
         - '*'
+    ignore:
+      - dependency-name: "alpine"
   - package-ecosystem: "docker"
     directory: "/docker/hdr-tools/"
     schedule:

@@ -19,7 +19,7 @@ GUI (QT) applications MatLab, OpenCV aren't supported. ImageMagick, NetPBM and s
 ## HDR Tools
 
 ```
-docker  build --progress=plain -t ghcr.io/cmahnke/hdr-tools:latest -f docker/hdr-tools/Dockerfile .
+docker build --progress=plain -t ghcr.io/cmahnke/hdr-tools:latest -f docker/hdr-tools/Dockerfile .
 ```
 
 ## Python OpenCV
