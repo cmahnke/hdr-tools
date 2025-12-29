@@ -1,4 +1,4 @@
-ARG TAG=3.12-alpine
+ARG TAG=3.12-alpine3.22
 
 FROM python:${TAG}
 
