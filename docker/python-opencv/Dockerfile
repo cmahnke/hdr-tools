@@ -2,7 +2,7 @@ ARG TAG=3.12-alpine3.22
 
 FROM python:${TAG}
 
-ARG OPENCV_TAG=4.10.0
+ARG OPENCV_TAG=4.13.0
 
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source="https://github.com/cmahnke/hdr-tools"

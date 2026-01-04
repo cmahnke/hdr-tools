@@ -14,7 +14,7 @@ env:
   IMAGEMAGICK_VERSION: '7.1.2-12'
   LIBULTRAHDR_GIT_TAG: 'v1.4.0'
   ADDITIONAL_DEPS: 'ffmpeg'
-  OPENCV_TAG: '4.12.0'
+  OPENCV_TAG: '4.13.0'
   PYTHON_TAG: '3.12-alpine3.22'
 
 concurrency:
