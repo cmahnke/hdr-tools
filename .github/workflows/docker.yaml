@@ -10,9 +10,9 @@ on:
     - cron: "0 8 * * 1"
 
 env:
-  LIBJXL_VERSION: v0.11.1
+  LIBJXL_VERSION: v0.12.0
   IMAGEMAGICK_VERSION: '7.1.2-29'
-  LIBULTRAHDR_GIT_TAG: 'v1.4.0'
+  LIBULTRAHDR_GIT_TAG: 'v2.0.1'
   ADDITIONAL_DEPS: 'ffmpeg'
   OPENCV_TAG: '4.13.0'
   PYTHON_TAG: '3.12-alpine3.22'
