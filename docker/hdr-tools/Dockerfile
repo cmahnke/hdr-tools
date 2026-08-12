@@ -2,13 +2,11 @@ ARG LIBJXL_VERSION="latest"
 
 FROM ghcr.io/cmahnke/jpeg-xl-action:${LIBJXL_VERSION}
 
-ARG IM_GIT_TAG=7.1.2-12
-ARG LIBULTRAHDR_GIT_TAG=main
+ARG IM_GIT_TAG=7.1.2-29
+ARG LIBULTRAHDR_GIT_TAG=v2.0.1
 ARG ADDITIONAL_DEPS=""
-ARG LIBJXR_GIT_REPO="https://github.com/mircomir/jxrlib.git"
-ARG LIBJXR_GIT_TAG="master"
-#ARG LIBJXR_GIT_REPO="https://salsa.debian.org/debian-phototools-team/jxrlib.git"
-#ARG LIBJXR_GIT_TAG="debian/1.2_git20170615.f752187-5"
+ARG LIBJXR_GIT_REPO="https://github.com/mircomir/jxrlib"
+ARG LIBJXR_GIT_TAG="1.4.2"
 
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source="https://github.com/cmahnke/hdr-tools"
